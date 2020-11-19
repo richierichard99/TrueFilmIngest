@@ -1,4 +1,5 @@
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import regexp_replace
 
 
 class ImportXML:
@@ -23,4 +24,7 @@ if __name__ == '__main__':
 
     wiki_csv_path = wiki_xml_path.replace('.xml', '.csv')
 
-    wiki_df.select(['title', 'abstract', 'url']).write.mode('overwrite').csv(wiki_csv_path)
+    wiki_df = wiki_df.select(['title', 'abstract', 'url'])
+    wiki_df = wiki_df.withColumn('title', regexp_replace('title', 'Wikipedia: ', ''))
+
+    wiki_df.write.mode('overwrite').csv(wiki_csv_path)
