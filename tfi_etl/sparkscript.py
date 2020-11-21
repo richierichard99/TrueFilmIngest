@@ -1,6 +1,5 @@
 from pyspark.sql import SparkSession
 from ConfigParser import ConfigParser
-import argparse
 
 """
     Main Class to run pyspark scripts
