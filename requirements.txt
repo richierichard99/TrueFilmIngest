@@ -5,3 +5,4 @@ pyspark
 
 ### Other ###
 requests
+configparser
