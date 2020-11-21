@@ -1,5 +1,5 @@
 from pyspark.sql.functions import regexp_replace
-from ConfigParser import ConfigParser
+import argparse
 
 
 class ImportXML:
@@ -35,10 +35,11 @@ if __name__ == '__main__':
     sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
     from tfi_etl.sparkscript import SparkScriptRunner
 
-    config_path = 'C:/myDev/trueLayer/repository/TrueFilmIngest/scripts/config.ini'
-    config = ConfigParser()
-    config.readfp(file(config_path))
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-config')
+    args = parser.parse_args()
+    config_path = str(args.config)
     xml_import = ImportXML()
 
-    script_runner = SparkScriptRunner(config, xml_import)
+    script_runner = SparkScriptRunner(config_path, xml_import)
     script_runner.run()
