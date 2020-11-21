@@ -4,7 +4,7 @@ import argparse
 
 """
     Main Class to run pyspark scripts
-    -   config: config options needed to run scripts
+    -   config_path: path to .ini file with config options needed to run scripts
     -   spark_script: script class to run. must contain a name value and main method. 
 
     e.g. class ExampleScript:
