@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 ./runSparkSubmit.sh ImportXml.py config.ini
 ./runSparkSubmit.sh JoinDatasets.py config.ini
 ./runSparkSubmit.sh CreateSqlInput.py config.ini

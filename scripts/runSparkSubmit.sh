@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # set to run on local mode - master needs configuring for any other run mode
 spark-submit \
     --master local \
