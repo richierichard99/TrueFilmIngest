@@ -1,5 +1,5 @@
 import argparse
-import json
+import yaml
 from pyspark.sql.functions import udf, when, year
 
 
@@ -9,9 +9,9 @@ class CreateSqlInput:
 
     @staticmethod
     @udf
-    def extract_production(json_string):
+    def extract_production(dict_string):
         try:
-            production_array = json.loads(json_string.replace("'", "\""))
+            production_array = yaml.load(dict_string, Loader=yaml.FullLoader)
             parsed_production = []
             for production in production_array:
                 parsed_production.append(production['name'])
