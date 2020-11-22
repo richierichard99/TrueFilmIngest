@@ -45,7 +45,7 @@ class CreateSqlInput:
                           'ratio',
                           'production_companies',
                           'url',
-                          'abstract']).limit(1000).write.mode('overwrite').parquet(sql_input_path)
+                          'abstract']).write.mode('overwrite').parquet(sql_input_path)
 
 
 if __name__ == '__main__':

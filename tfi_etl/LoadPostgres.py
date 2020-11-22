@@ -9,11 +9,13 @@ class LoadPostgres:
     def main(spark, config):
 
         sql_input_path = config.get('PATHS', 'sql_input_path')
-        sql_input_df = spark.read.parquet(sql_input_path)
+        rows_to_load = int(config.get('DB_SETTINGS', 'rows'))
+        sql_input_df = spark.read.parquet(sql_input_path).limit(rows_to_load)
+
         tablename = config.get('DB_SETTINGS', 'tablename')
         db_url = config.get('DB_SETTINGS', 'url')
-
         print('loading to postgres db: ' + db_url)
+        print('table name: ' + tablename)
 
         properties = {
             'user': config.get('DB_SETTINGS', 'username'),
