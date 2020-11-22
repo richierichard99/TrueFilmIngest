@@ -1,5 +1,17 @@
 import requests
 import sys
+import argparse
+
+"""
+ Class to download artifacts from maven (or other repositories)
+ -  base_url: repository root, defaults to https://repo1.maven.org/maven2/
+ 
+ usage: 
+ python setup.py 
+    -req <path to txt file containing one dependency per line (full path from base repo to artifact> 
+    -url [Optional] <repository_base_url>
+
+"""
 
 
 class MavenDownloader:
@@ -23,7 +35,16 @@ class MavenDownloader:
 
 
 if __name__ == '__main__':
-    downloader = MavenDownloader()
-    with open(sys.argv[1], 'r') as f:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-url')
+    parser.add_argument('-req')
+    args = parser.parse_args()
+
+    if args.url:
+        downloader = MavenDownloader(args.url)
+    else:
+        downloader = MavenDownloader()
+
+    with open(args.req, 'r') as f:
         for line in f.readlines():
             downloader.download(line.strip())
